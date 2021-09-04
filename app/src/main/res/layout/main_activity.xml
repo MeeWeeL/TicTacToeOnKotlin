@@ -1,7 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity" />
+    tools:context=".view.MainFragment">
+
+    <ImageButton
+        android:id="@+id/position_00"
+        style="@style/button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/position_10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/position_01"/>
+
+    <ImageButton
+        android:id="@+id/position_01"
+        style="@style/button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/position_11"
+        app:layout_constraintStart_toEndOf="@id/position_00"
+        app:layout_constraintEnd_toStartOf="@+id/position_02"/>
+
+    <ImageButton
+        android:id="@+id/position_02"
+        style="@style/button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/position_12"
+        app:layout_constraintStart_toEndOf="@id/position_01"
+        app:layout_constraintEnd_toStartOf="@+id/position_03"/>
+
+    <ImageButton
+        android:id="@+id/position_03"
+        style="@style/button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/position_13"
+        app:layout_constraintStart_toEndOf="@id/position_02"
+        app:layout_constraintEnd_toStartOf="@+id/position_04"/>
+
+    <ImageButton
+        android:id="@+id/position_04"
+        style="@style/button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/position_14"
+        app:layout_constraintStart_toEndOf="@id/position_03"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/position_10"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_00"
+        app:layout_constraintBottom_toTopOf="@+id/position_20"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/position_11"/>
+
+    <ImageButton
+        android:id="@+id/position_11"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_01"
+        app:layout_constraintBottom_toTopOf="@+id/position_21"
+        app:layout_constraintStart_toEndOf="@id/position_10"
+        app:layout_constraintEnd_toStartOf="@+id/position_12"/>
+
+    <ImageButton
+        android:id="@+id/position_12"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_02"
+        app:layout_constraintBottom_toTopOf="@+id/position_22"
+        app:layout_constraintStart_toEndOf="@id/position_11"
+        app:layout_constraintEnd_toStartOf="@+id/position_13"/>
+
+    <ImageButton
+        android:id="@+id/position_13"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_03"
+        app:layout_constraintBottom_toTopOf="@+id/position_23"
+        app:layout_constraintStart_toEndOf="@id/position_12"
+        app:layout_constraintEnd_toStartOf="@+id/position_14"/>
+
+    <ImageButton
+        android:id="@+id/position_14"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_04"
+        app:layout_constraintBottom_toTopOf="@+id/position_24"
+        app:layout_constraintStart_toEndOf="@id/position_13"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/position_20"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_10"
+        app:layout_constraintBottom_toTopOf="@+id/position_30"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/position_21"/>
+
+    <ImageButton
+        android:id="@+id/position_21"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_11"
+        app:layout_constraintBottom_toTopOf="@+id/position_31"
+        app:layout_constraintStart_toEndOf="@id/position_20"
+        app:layout_constraintEnd_toStartOf="@+id/position_22"/>
+
+    <ImageButton
+        android:id="@+id/position_22"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_12"
+        app:layout_constraintBottom_toTopOf="@+id/position_32"
+        app:layout_constraintStart_toEndOf="@id/position_21"
+        app:layout_constraintEnd_toStartOf="@+id/position_23"/>
+
+    <ImageButton
+        android:id="@+id/position_23"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_13"
+        app:layout_constraintBottom_toTopOf="@+id/position_33"
+        app:layout_constraintStart_toEndOf="@id/position_22"
+        app:layout_constraintEnd_toStartOf="@+id/position_24"/>
+
+    <ImageButton
+        android:id="@+id/position_24"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_14"
+        app:layout_constraintBottom_toTopOf="@+id/position_34"
+        app:layout_constraintStart_toEndOf="@id/position_23"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/position_30"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_20"
+        app:layout_constraintBottom_toTopOf="@+id/position_40"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/position_31"/>
+
+    <ImageButton
+        android:id="@+id/position_31"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_21"
+        app:layout_constraintBottom_toTopOf="@+id/position_41"
+        app:layout_constraintStart_toEndOf="@id/position_30"
+        app:layout_constraintEnd_toStartOf="@+id/position_32"/>
+
+    <ImageButton
+        android:id="@+id/position_32"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_22"
+        app:layout_constraintBottom_toTopOf="@+id/position_42"
+        app:layout_constraintStart_toEndOf="@id/position_31"
+        app:layout_constraintEnd_toStartOf="@+id/position_33"/>
+
+    <ImageButton
+        android:id="@+id/position_33"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_23"
+        app:layout_constraintBottom_toTopOf="@+id/position_43"
+        app:layout_constraintStart_toEndOf="@id/position_32"
+        app:layout_constraintEnd_toStartOf="@+id/position_34"/>
+
+    <ImageButton
+        android:id="@+id/position_34"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_24"
+        app:layout_constraintBottom_toTopOf="@+id/position_44"
+        app:layout_constraintStart_toEndOf="@id/position_33"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/position_40"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/position_41"/>
+
+    <ImageButton
+        android:id="@+id/position_41"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_31"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/position_40"
+        app:layout_constraintEnd_toStartOf="@+id/position_42"/>
+
+    <ImageButton
+        android:id="@+id/position_42"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_32"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/position_41"
+        app:layout_constraintEnd_toStartOf="@+id/position_43"/>
+
+    <ImageButton
+        android:id="@+id/position_43"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_33"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/position_42"
+        app:layout_constraintEnd_toStartOf="@+id/position_44"/>
+
+    <ImageButton
+        android:id="@+id/position_44"
+        style="@style/button"
+        app:layout_constraintTop_toBottomOf="@id/position_34"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/position_43"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
