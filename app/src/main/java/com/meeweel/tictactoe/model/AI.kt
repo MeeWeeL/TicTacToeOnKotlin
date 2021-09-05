@@ -1,82 +1,168 @@
 package com.meeweel.tictactoe.model
 
 class AI {
-    val DOT_O = 2
+    val enemy = 1
+    val dot = 2
+    val defaultDot = 0
     var done = 0
     private val SIZE = 5
     private val DOTS_TO_WIN = 4
-    var isFind = false
     var x: Int? = null
     var y: Int? = null
     fun aiStep(map: MutableList<MutableList<Int>>) {
-        isFind = false
         done = 0
-
-        if (!isFind){
+        do {
+            if (verticalAiTurn(map, DOTS_TO_WIN, dot)) break
+            if (horizontalAiTurn(map, DOTS_TO_WIN, dot)) break
+            if (diagonalDownAiTurn(map, DOTS_TO_WIN, dot)) break
+            if (diagonalUpAiTurn(map, DOTS_TO_WIN, dot)) break
+            if (verticalAiTurn(map, DOTS_TO_WIN, enemy)) break
+            if (horizontalAiTurn(map, DOTS_TO_WIN, enemy)) break
+            if (diagonalDownAiTurn(map, DOTS_TO_WIN, enemy)) break
+            if (diagonalUpAiTurn(map, DOTS_TO_WIN, enemy)) break
+            if (verticalAiTurn(map, DOTS_TO_WIN - 1, enemy)) break
+            if (horizontalAiTurn(map, DOTS_TO_WIN - 1, enemy)) break
+            if (diagonalDownAiTurn(map, DOTS_TO_WIN - 1, enemy)) break
+            if (diagonalUpAiTurn(map, DOTS_TO_WIN - 1, enemy)) break
+            if (verticalAiTurn(map, DOTS_TO_WIN - 1, dot)) break
+            if (horizontalAiTurn(map, DOTS_TO_WIN - 1, dot)) break
+            if (diagonalDownAiTurn(map, DOTS_TO_WIN - 1, dot)) break
+            if (diagonalUpAiTurn(map, DOTS_TO_WIN - 1, dot)) break
+            if (verticalAiTurn(map, DOTS_TO_WIN - 2, enemy)) break
+            if (horizontalAiTurn(map, DOTS_TO_WIN - 2, enemy)) break
+            if (diagonalDownAiTurn(map, DOTS_TO_WIN - 2, enemy)) break
+            if (diagonalUpAiTurn(map, DOTS_TO_WIN - 2, enemy)) break
             while (done == 0) {
                 x = (0 until 5).random()
                 y = (0 until 5).random()
                 if (map[x!!][y!!] == 0) {
-                    map[x!!][y!!] = 2
                     done = 1
                 }
             }
-        }
+        } while (false)
+        map[x!!][y!!] = dot
     }
-    private fun vertical(localMap: MutableList<MutableList<Int>>, dot: Int) : Boolean {
-        var row: Int = 0 // счётчик для определения победной серии
 
+
+    private fun horizontalAiTurn(map: MutableList<MutableList<Int>>, winRate: Int, findingDot: Int) : Boolean {
+        var row: Int // счётчик для определения победной серии
+        var g: Int // for for
         for (i in 0 until SIZE) {
-            for (j in 0..SIZE - DOTS_TO_WIN) {
+            for (j in 0..SIZE - winRate) {
                 row = 0 // обнуляю счётчик перед прогоном
-                for (g in 0 until DOTS_TO_WIN) {
-                    if (localMap[i][j + g] == dot) row++
+                g = 0
+                while (g < winRate) {
+                    if (j + g in 0 until SIZE) {
+                        if (map[i][j + g] == findingDot) row++
+                    }
+                    g++
                 }
-                if (row == DOTS_TO_WIN) return true
+                if (row == winRate - 1) {
+                    g = 0
+                    while (g < winRate) {
+                        if (j + g in 0 until SIZE) {
+                            if (map[i][j + g] == defaultDot) {
+                                x = i
+                                y = j + g
+                                return true
+                            }
+                        }
+                        g++
+                    }
+                }
             }
         }
         return false
     }
-    private fun horizontal(localMap: MutableList<MutableList<Int>>, dot: Int) : Boolean {
-        var row: Int = 0 // счётчик для определения победной серии
-
-        for (i in 0 until SIZE) {
-            for (j in 0..SIZE - DOTS_TO_WIN) {
+    private fun verticalAiTurn(map: MutableList<MutableList<Int>>, winRate: Int, findingDot: Int) : Boolean {
+        var row: Int // счётчик для определения победной серии
+        var g: Int // for for
+        for (j in 0 until SIZE) {
+            for (i in 0..SIZE - winRate) {
                 row = 0 // обнуляю счётчик перед прогоном
-                for (g in 0 until DOTS_TO_WIN) {
-                    if (localMap[j + g][i] == dot) row++
+                g = 0
+                while (g < winRate) {
+                    if (i + g in 0 until SIZE) {
+                        if (map[i + g][j] == findingDot) row++
+                    }
+                    g++
                 }
-                if (row == DOTS_TO_WIN) return true
+                if (row == winRate - 1) {
+                    g = 0
+                    while (g < winRate) {
+                        if (i + g in 0 until SIZE) {
+                            if (map[i + g][j] == defaultDot) {
+                                x = i + g
+                                y = j
+                                return true
+                            }
+                        }
+                        g++
+                    }
+                }
             }
         }
         return false
     }
-    private fun diagonalDown(localMap: MutableList<MutableList<Int>>, dot: Int) : Boolean {
-        var row: Int = 0 // счётчик для определения победной серии
-
+    private fun diagonalDownAiTurn(map: MutableList<MutableList<Int>>, winRate: Int, findingDot: Int) : Boolean {
+        var row: Int // счётчик для определения победной серии
+        var g: Int // for for
         for (i in 0..SIZE - DOTS_TO_WIN) {
             for (j in 0..SIZE - DOTS_TO_WIN) {
                 row = 0 // обнуляю счётчик перед прогоном
-                for (g in 0 until DOTS_TO_WIN) {
-                    if (localMap[g + j][g + i] == dot) row++
+                g = 0
+                while (g < winRate) {
+                    if (i + g in 0 until SIZE && j + g in 0 until SIZE) {
+                        if (map[i + g][j + g] == findingDot) row++
+                    }
+                    g++
                 }
-                if (row == DOTS_TO_WIN) return true
+                if (row == winRate - 1) {
+                    g = 0
+                    while (g < winRate) {
+                        if (i + g in 0 until SIZE && j + g in 0 until SIZE) {
+                            if (map[i + g][j + g] == defaultDot) {
+                                x = i + g
+                                y = j + g
+                                return true
+                            }
+                        }
+                        g++
+                    }
+                }
             }
         }
         return false
     }
-    private fun diagonalUp(localMap: MutableList<MutableList<Int>>, dot: Int) : Boolean {
-        var row: Int = 0 // счётчик для определения победной серии
-
-        for (i in DOTS_TO_WIN - 1 until SIZE) {
-            for (j in 0..SIZE - DOTS_TO_WIN) {
+    private fun diagonalUpAiTurn(map: MutableList<MutableList<Int>>, winRate: Int, findingDot: Int) : Boolean {
+        var row: Int // счётчик для определения победной серии
+        var g: Int // for for
+        for (i in 0..SIZE - DOTS_TO_WIN) {
+            for (j in DOTS_TO_WIN - 1 until SIZE) {
                 row = 0 // обнуляю счётчик перед прогоном
-                for (g in 0 until DOTS_TO_WIN) {
-                    if (localMap[i - g][j + g] == dot) row++
+                g = 0
+                while (g < winRate) {
+                    if (i + g in 0 until SIZE && j - g in 0 until SIZE) {
+                        if (map[i + g][j - g] == findingDot) row++
+                    }
+                    g++
                 }
-                if (row == DOTS_TO_WIN) return true
+                if (row == winRate - 1) {
+                    g = 0
+                    while (g < winRate) {
+                        if (i + g in 0 until SIZE && j - g in 0 until SIZE) {
+                            if (map[i + g][j - g] == defaultDot) {
+                                x = i + g
+                                y = j - g
+                                return true
+                            }
+                        }
+                        g++
+                    }
+                }
             }
         }
         return false
     }
+
 }

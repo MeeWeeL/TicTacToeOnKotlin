@@ -20,7 +20,6 @@ class TicMap {
     fun aiStep() {
         ai.aiStep(map)
         if (checkWin(map, 2)) winner = 2
-        map[ai.x!!][ai.y!!]
     }
     private fun checkWin(localMap: MutableList<MutableList<Int>>, dot: Int) : Boolean {
         if (vertical(localMap, dot)) return true;
