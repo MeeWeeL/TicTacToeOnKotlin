@@ -1,16 +1,16 @@
 package com.meeweel.tictactoe.view
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.meeweel.tictactoe.R
 import com.meeweel.tictactoe.databinding.MainActivityBinding
-import com.meeweel.tictactoe.model.TicMap
 import com.meeweel.tictactoe.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -25,21 +25,52 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setListener()
-        setClickers(listener)
-        viewModel.set()
-        showToast("Gaga")
+        startNewGame()
     }
 
     override fun onClick(v: View?) {
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.ic_menu, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.restart -> startNewGame()
+            R.id.space_menu -> fullscreen()
+        }
+        return true
+    }
+
+    fun fullscreen() {
+        if (binding.space.isVisible) {
+            binding.space.visibility = View.GONE
+        } else {
+            binding.space.visibility = View.VISIBLE
+        }
+    }
+    private fun startNewGame() {
+        binding.status.text = ""
+        binding.status.visibility = View.GONE
+        setClickers(listener)
+        viewModel.refresh()
+    }
     override fun onResume() {
         super.onResume()
         viewModel.set()
         viewModel.liveDataWinner.observe(this, {
             if (it != 0) setClickers(null)
-            if (it == 1) Toast.makeText(this, "You Win!!!", Toast.LENGTH_LONG).show()
-            if (it == 2) Toast.makeText(this, "You Lose!!!", Toast.LENGTH_LONG).show()
+            if (it == 1) {
+                binding.status.text = "You Win!!!"
+                binding.status.visibility = View.VISIBLE
+                Toast.makeText(this, "You Win!!!", Toast.LENGTH_LONG).show()
+            }
+            if (it == 2) {
+                binding.status.text = "You Lose!!!"
+                binding.status.visibility = View.VISIBLE
+                Toast.makeText(this, "You Lose!!!", Toast.LENGTH_LONG).show()
+            }
         })
         viewModel.liveData00.observe(this, {
             changeImage(it, binding.position00)
@@ -223,8 +254,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         viewModel.liveData42.value = 1
                         viewModel.step(4, 2)
                     }
-                    position43 -> viewModel.refresh()
-                    position44 -> viewModel.set()
+                    position43 -> if (viewModel.liveData43.value == 0) {
+                        viewModel.liveData43.value = 1
+                        viewModel.step(4, 3)
+                    }
+                    position44 -> if (viewModel.liveData44.value == 0) {
+                            viewModel.liveData44.value = 1
+                            viewModel.step(4, 4)
+                        }
                 }
             }
         }
