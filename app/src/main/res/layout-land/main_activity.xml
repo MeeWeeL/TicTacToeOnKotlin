@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:src="@drawable/back_white"
-        app:layout_constraintBottom_toBottomOf="@+id/space"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +24,7 @@
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:src="@drawable/back"
-        app:layout_constraintBottom_toBottomOf="@+id/space"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -81,7 +81,7 @@
         app:layout_constraintTop_toBottomOf="@id/status"
         app:layout_constraintBottom_toTopOf="@+id/position_14"
         app:layout_constraintStart_toEndOf="@id/position_03"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@id/space"/>
 
     <ImageButton
         android:id="@+id/position_10"
@@ -121,7 +121,7 @@
         app:layout_constraintTop_toBottomOf="@id/position_04"
         app:layout_constraintBottom_toTopOf="@+id/position_24"
         app:layout_constraintStart_toEndOf="@id/position_13"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@id/space"/>
 
     <ImageButton
         android:id="@+id/position_20"
@@ -161,7 +161,7 @@
         app:layout_constraintTop_toBottomOf="@id/position_14"
         app:layout_constraintBottom_toTopOf="@+id/position_34"
         app:layout_constraintStart_toEndOf="@id/position_23"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@id/space"/>
 
     <ImageButton
         android:id="@+id/position_30"
@@ -201,13 +201,13 @@
         app:layout_constraintTop_toBottomOf="@id/position_24"
         app:layout_constraintBottom_toTopOf="@+id/position_44"
         app:layout_constraintStart_toEndOf="@id/position_33"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@id/space"/>
 
     <ImageButton
         android:id="@+id/position_40"
         style="@style/button"
         app:layout_constraintTop_toBottomOf="@id/position_30"
-        app:layout_constraintBottom_toTopOf="@id/space"
+        app:layout_constraintBottom_toTopOf="@id/ad_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/position_41"/>
 
@@ -215,7 +215,7 @@
         android:id="@+id/position_41"
         style="@style/button"
         app:layout_constraintTop_toBottomOf="@id/position_31"
-        app:layout_constraintBottom_toTopOf="@id/space"
+        app:layout_constraintBottom_toTopOf="@id/ad_view"
         app:layout_constraintStart_toEndOf="@id/position_40"
         app:layout_constraintEnd_toStartOf="@+id/position_42"/>
 
@@ -223,7 +223,7 @@
         android:id="@+id/position_42"
         style="@style/button"
         app:layout_constraintTop_toBottomOf="@id/position_32"
-        app:layout_constraintBottom_toTopOf="@id/space"
+        app:layout_constraintBottom_toTopOf="@id/ad_view"
         app:layout_constraintStart_toEndOf="@id/position_41"
         app:layout_constraintEnd_toStartOf="@+id/position_43"/>
 
@@ -231,7 +231,7 @@
         android:id="@+id/position_43"
         style="@style/button"
         app:layout_constraintTop_toBottomOf="@id/position_33"
-        app:layout_constraintBottom_toTopOf="@id/space"
+        app:layout_constraintBottom_toTopOf="@id/ad_view"
         app:layout_constraintStart_toEndOf="@id/position_42"
         app:layout_constraintEnd_toStartOf="@+id/position_44"/>
 
@@ -239,20 +239,21 @@
         android:id="@+id/position_44"
         style="@style/button"
         app:layout_constraintTop_toBottomOf="@id/position_34"
-        app:layout_constraintBottom_toTopOf="@id/space"
+        app:layout_constraintBottom_toTopOf="@id/ad_view"
         app:layout_constraintStart_toEndOf="@id/position_43"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@id/space"/>
 
     <ImageView
         android:id="@+id/space"
         android:src="@drawable/space"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/position_42"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/position_44"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/ad_view"
-        app:layout_constraintVertical_weight="3"
+        android:scaleType="centerInside"
+        app:layout_constraintHorizontal_weight="3"
         android:visibility="gone" />
 
     <com.google.android.gms.ads.AdView
@@ -263,7 +264,7 @@
         android:layout_centerHorizontal="true"
         app:adSize="BANNER"
         app:adUnitId="ca-app-pub-1316488884400350/3260392156"
-        app:layout_constraintTop_toBottomOf="@id/space"
+        app:layout_constraintTop_toBottomOf="@id/position_44"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

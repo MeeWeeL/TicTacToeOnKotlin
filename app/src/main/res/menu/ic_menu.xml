@@ -4,7 +4,7 @@
     <item
         android:title="Restart"
         android:id="@+id/restart"
-        android:icon="@drawable/restart"
+        android:icon="@drawable/reload"
         app:showAsAction="always"
         android:orderInCategory="1"/>
     <item

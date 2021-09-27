@@ -6,6 +6,8 @@ import com.meeweel.tictactoe.model.TicMap
 
 
 class MainViewModel() : ViewModel() {
+    var first: String? = null
+    var full: String? = null
     private val mainMap: TicMap = TicMap()
     val liveDataWinner: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>()
@@ -130,6 +132,7 @@ class MainViewModel() : ViewModel() {
         }
         mainMap.winner = 0
         set()
+        first = "One"
     }
     fun checkPosition(x: Int, y: Int): Boolean {
         return mainMap.map[x][y] == 0

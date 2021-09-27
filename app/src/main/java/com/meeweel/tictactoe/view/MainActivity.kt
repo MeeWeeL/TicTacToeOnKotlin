@@ -1,5 +1,6 @@
 package com.meeweel.tictactoe.view
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -9,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.ads.*
 import com.meeweel.tictactoe.R
 import com.meeweel.tictactoe.databinding.MainActivityBinding
 import com.meeweel.tictactoe.viewmodel.MainViewModel
@@ -20,31 +22,59 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setListener()
-        startNewGame()
+        viewModel.first?.let {
+            viewModel.set()
+            fullscreen()
+            setClickers(listener)
+        } ?: startNewGame()
+        supportActionBar?.show()
+        MobileAds.initialize(this) {}
+
+        val adRequest = AdRequest.Builder().build()
+
+        binding.adView.loadAd(adRequest)
+    }
+    public override fun onPause() {
+        binding.adView.pause()
+        super.onPause()
     }
 
+    public override fun onDestroy() {
+        binding.adView.destroy()
+        super.onDestroy()
+    }
     override fun onClick(v: View?) {
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.ic_menu, menu)
+        supportActionBar?.setBackgroundDrawable(getDrawable(R.drawable.background))
         return true
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.restart -> startNewGame()
-            R.id.space_menu -> fullscreen()
+            R.id.space_menu -> {
+                if (viewModel.full == null) {
+                    viewModel.full = "null"
+                } else {
+                    viewModel.full = null
+                }
+                fullscreen()
+            }
         }
         return true
     }
 
-    fun fullscreen() {
-        if (binding.space.isVisible) {
+    private fun fullscreen() {
+        if (viewModel.full == null) {
             binding.space.visibility = View.GONE
         } else {
             binding.space.visibility = View.VISIBLE
@@ -58,6 +88,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
     override fun onResume() {
         super.onResume()
+        binding.adView.resume()
         viewModel.set()
         viewModel.liveDataWinner.observe(this, {
             if (it != 0) setClickers(null)
@@ -158,7 +189,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             2 -> b.setImageResource(R.drawable.value_2)
         }
     }
-    fun setListener() {
+    private fun setListener() {
         listener = View.OnClickListener { v ->
             with (binding) {
                 when (v) {
@@ -266,7 +297,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
-    fun setClickers(v: View.OnClickListener?) {
+    private fun setClickers(v: View.OnClickListener?) {
 
         binding.position00.setOnClickListener(v)
         binding.position01.setOnClickListener(v)
